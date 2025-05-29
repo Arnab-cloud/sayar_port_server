@@ -2,11 +2,12 @@ import nodemailer from "nodemailer";
 import { createCanvas, loadImage, registerFont, Image } from "canvas";
 import QRCode from "qrcode";
 import { z } from "zod";
+import process from "process";
 // import { generateBadge } from "./badgeGenerator";
 
 // Email credentials - hardcoded for simplicity
-const EMAIL_USER = "sayar.basu007@gmail.com";
-const EMAIL_PASSWORD = "fxusbxyeoqzexvlt";
+const EMAIL_USER = process.env.EMAIL_USER || "sayar.basu007@gmail.com";
+const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD || "fxusbxyeoqzexvlt";
 
 // interface SendBadgeEmailParams {
 // 	to: string;
@@ -335,17 +336,17 @@ function createGmailTransporter() {
 	});
 }
 
+// Changing this
 export async function sendBadgeEmail(
 	to: string,
 	name: string,
-	email: string,
-	photoURL?: string | null
+	badgeBuffer: Buffer<ArrayBufferLike>
 ) {
 	try {
 		console.log("Starting email send process to:", to);
 
 		// Generate the badge
-		const badgeBuffer = await generateBadge({ name, email, photoURL });
+		// const badgeBuffer = await generateBadge({ name, email, photoURL });
 		console.log("Badge generated successfully");
 
 		// Create Gmail transporter

@@ -90,7 +90,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 			console.log("Received badge email request for:", data.email);
 
 			// Generate badge image
-			await generateBadge({
+			const badgeBuffer = await generateBadge({
 				name: data.name || "Guest",
 				email: data.email,
 				photoURL: data.photoURL || null,
@@ -98,12 +98,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 			console.log("Badge generated successfully");
 
 			// Send email
-			await sendBadgeEmail(
-				data.email,
-				data.name || "Guest",
-				data.email,
-				data.photoURL
-			);
+			await sendBadgeEmail(data.email, data.name || "Guest", badgeBuffer);
 			console.log("Badge email sent successfully to:", data.email);
 
 			res.status(200).json({
