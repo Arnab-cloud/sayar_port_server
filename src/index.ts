@@ -1,5 +1,5 @@
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "../routes";
+import { registerRoutes } from "./services/routes";
 
 const port = 3000;
 

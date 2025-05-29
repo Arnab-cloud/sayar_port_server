@@ -2,8 +2,8 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 // import { storage } from "./storage";
 import { z, ZodError } from "zod";
-import { sendBadgeEmail } from "./services/emailService";
-import { generateBadge } from "./services/badgeGenerator";
+import { sendBadgeEmail } from "./emailService";
+import { generateBadge } from "./badgeGenerator";
 
 // 📌 Validation schemas
 const sendBadgeSchema = z.object({
